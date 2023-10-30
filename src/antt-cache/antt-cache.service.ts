@@ -1,22 +1,23 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { InjectModel } from '@nestjs/mongoose';
-import { CreateAnttCacheDto } from 'dto/request/create-antt-cache.dto';
-import { UpdateAnttCacheDto } from 'dto/request/update-antt-cache.dto';
-import { IAnttCache } from 'interface/anttCache.interface';
-import { Model } from 'mongoose';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
+import { InjectModel } from "@nestjs/mongoose";
+import { CreateAnttCacheDto } from "dto/request/create-antt-cache.dto";
+import { UpdateAnttCacheDto } from "dto/request/update-antt-cache.dto";
+import { IAnttCache } from "interface/anttCache.interface";
+import { Model } from "mongoose";
 import {
   ANTT_CACHE_EMPTY,
   ANTT_CACHE_RECORD_NOT_FOUND_ID,
   ANTT_CACHE_RECORD_NOT_FOUND_PARAMETERS,
-} from 'src/constants';
+} from "src/constants";
 
 ConfigModule.forRoot();
 
 @Injectable()
 export class AnttCacheService {
   constructor(
-    @InjectModel(process.env.DB_DATABASE) private anttCacheModel: Model<IAnttCache>,
+    @InjectModel(process.env.DB_DATABASE)
+    private anttCacheModel: Model<IAnttCache>
   ) {}
 
   /**
@@ -25,10 +26,12 @@ export class AnttCacheService {
    * @returns IAnttCache
    */
   async createOrUpdateAnttCache(
-    createAnttCacheDto: CreateAnttCacheDto,
+    createAnttCacheDto: CreateAnttCacheDto
   ): Promise<IAnttCache> {
     const { carrierTaxId, carrierRntrc, licensePlate, protocol } =
       createAnttCacheDto;
+
+    createAnttCacheDto.updatedAt = new Date();
 
     const existingAnttCache = await this.anttCacheModel.findOne({
       carrierTaxId,
@@ -45,6 +48,7 @@ export class AnttCacheService {
 
     if (existingAnttCacheProtocol) return existingAnttCacheProtocol;
 
+    createAnttCacheDto.createdAt = new Date();
     const createdAnttCache = await new this.anttCacheModel(createAnttCacheDto);
     return createdAnttCache.save();
   }
@@ -57,16 +61,16 @@ export class AnttCacheService {
    */
   async updateAnttCache(
     updateAnttCacheDto: UpdateAnttCacheDto,
-    anttCacheId: string,
+    anttCacheId: string
   ): Promise<IAnttCache> {
     const existingAnttCache = await this.anttCacheModel.findByIdAndUpdate(
       anttCacheId,
       updateAnttCacheDto,
-      { new: true },
+      { new: true }
     );
     if (!existingAnttCache) {
       throw new NotFoundException(
-        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`,
+        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`
       );
     }
     return existingAnttCache;
@@ -95,7 +99,7 @@ export class AnttCacheService {
       .exec();
     if (!existingAnttCache) {
       throw new NotFoundException(
-        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`,
+        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`
       );
     }
     return existingAnttCache;
@@ -111,7 +115,7 @@ export class AnttCacheService {
   async getAnttCacheByFields(
     licensePlate?: string,
     carrierTaxId?: string,
-    carrierRntrc?: string,
+    carrierRntrc?: string
   ): Promise<IAnttCache[]> {
     const existingAnttCache = await this.anttCacheModel.find({
       ...(licensePlate ? { licensePlate } : {}),
@@ -121,7 +125,7 @@ export class AnttCacheService {
 
     if (!existingAnttCache || existingAnttCache.length == 0) {
       throw new NotFoundException(
-        `${ANTT_CACHE_RECORD_NOT_FOUND_PARAMETERS} License Plate = ${licensePlate}, Carrier TaxId = ${carrierTaxId}, Carrier RNTRC = ${carrierRntrc}.`,
+        `${ANTT_CACHE_RECORD_NOT_FOUND_PARAMETERS} License Plate = ${licensePlate}, Carrier TaxId = ${carrierTaxId}, Carrier RNTRC = ${carrierRntrc}.`
       );
     }
 
@@ -138,7 +142,7 @@ export class AnttCacheService {
       await this.anttCacheModel.findByIdAndDelete(anttCacheId);
     if (!deletedAnttCache) {
       throw new NotFoundException(
-        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`,
+        `${ANTT_CACHE_RECORD_NOT_FOUND_ID}${anttCacheId}`
       );
     }
     return deletedAnttCache;
