@@ -39,7 +39,7 @@ __decorate([
     __metadata("design:type", String)
 ], AnttCache.prototype, "carrierRntrc", void 0);
 __decorate([
-    (0, mongoose_1.Prop)(),
+    (0, mongoose_1.Prop)({ unique: true }),
     __metadata("design:type", String)
 ], AnttCache.prototype, "licensePlate", void 0);
 __decorate([
@@ -53,5 +53,5 @@ __decorate([
 exports.AnttCache = AnttCache = __decorate([
     (0, mongoose_1.Schema)()
 ], AnttCache);
-exports.AnttCacheSchema = mongoose_1.SchemaFactory.createForClass(AnttCache).index({ carrierTaxId: 1, carrierRntrc: 1, licensePlate: 1 }, { unique: true });
+exports.AnttCacheSchema = mongoose_1.SchemaFactory.createForClass(AnttCache).index({ carrierTaxId: 1, carrierRntrc: 1 }, { unique: true });
 //# sourceMappingURL=driveraux.schema.js.map

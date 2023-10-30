@@ -24,19 +24,19 @@ let AnttCacheService = class AnttCacheService {
         this.anttCacheModel = anttCacheModel;
     }
     async createOrUpdateAnttCache(createAnttCacheDto) {
-        const { carrierTaxId, carrierRntrc, licensePlate, protocol } = createAnttCacheDto;
-        const existingAnttCache = await this.anttCacheModel.findOne({
-            carrierTaxId,
-            carrierRntrc,
-            licensePlate,
-        });
-        if (existingAnttCache)
-            return this.updateAnttCache(createAnttCacheDto, existingAnttCache._id);
+        const { licensePlate, protocol } = createAnttCacheDto;
+        createAnttCacheDto.updatedAt = new Date();
         const existingAnttCacheProtocol = await this.anttCacheModel.findOne({
             protocol,
         });
         if (existingAnttCacheProtocol)
             return existingAnttCacheProtocol;
+        const existingAnttCache = await this.anttCacheModel.findOne({
+            licensePlate,
+        });
+        if (existingAnttCache)
+            return this.updateAnttCache(createAnttCacheDto, existingAnttCache._id);
+        createAnttCacheDto.createdAt = new Date();
         const createdAnttCache = await new this.anttCacheModel(createAnttCacheDto);
         return createdAnttCache.save();
     }

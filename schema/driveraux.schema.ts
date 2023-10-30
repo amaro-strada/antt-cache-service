@@ -19,7 +19,7 @@ export class AnttCache {
   @Prop()
   carrierRntrc: string;
 
-  @Prop()
+  @Prop({ unique: true})
   licensePlate: string;
 
   @Prop()
@@ -30,6 +30,6 @@ export class AnttCache {
 }
 
 export const AnttCacheSchema = SchemaFactory.createForClass(AnttCache).index(
-  { carrierTaxId: 1, carrierRntrc: 1, licensePlate: 1 },
+  { carrierTaxId: 1, carrierRntrc: 1},
   { unique: true },
 );

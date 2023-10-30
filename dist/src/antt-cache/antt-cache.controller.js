@@ -24,9 +24,6 @@ let AnttCacheController = class AnttCacheController {
     }
     async createOrUpdateAnttCache(response, createAnttCacheDto) {
         try {
-            const anttCache = createAnttCacheDto;
-            anttCache.createdAt = new Date();
-            anttCache.updatedAt = new Date();
             const createdAnttCache = await this.anttCacheService.createOrUpdateAnttCache(createAnttCacheDto);
             return response.status(common_1.HttpStatus.CREATED).json({
                 message: constants_1.ANTT_CACHE_RECORD_CREATED_OR_UPDATED,
@@ -35,7 +32,7 @@ let AnttCacheController = class AnttCacheController {
         }
         catch (err) {
             console.log(err);
-            let errorMessage = 'Internal Error';
+            let errorMessage = "Internal Error";
             if (err.code === 11000)
                 errorMessage = constants_1.VIOLATION_UNIQUE_KEY_ERROR;
             return response.status(common_1.HttpStatus.INTERNAL_SERVER_ERROR).json({
@@ -80,7 +77,7 @@ let AnttCacheController = class AnttCacheController {
 exports.AnttCacheController = AnttCacheController;
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('api-key')),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("api-key")),
     __param(0, (0, common_1.Res)()),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -89,35 +86,35 @@ __decorate([
 ], AnttCacheController.prototype, "createOrUpdateAnttCache", null);
 __decorate([
     (0, common_1.Get)(),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('api-key')),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("api-key")),
     __param(0, (0, common_1.Res)()),
-    __param(1, (0, common_1.Query)('licensePlate')),
-    __param(2, (0, common_1.Query)('carrierTaxId')),
-    __param(3, (0, common_1.Query)('carrierRntrc')),
+    __param(1, (0, common_1.Query)("licensePlate")),
+    __param(2, (0, common_1.Query)("carrierTaxId")),
+    __param(3, (0, common_1.Query)("carrierRntrc")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, Object, Object, Object]),
     __metadata("design:returntype", Promise)
 ], AnttCacheController.prototype, "getAnttCaches", null);
 __decorate([
-    (0, common_1.Get)('/:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('api-key')),
+    (0, common_1.Get)("/:id"),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("api-key")),
     __param(0, (0, common_1.Res)()),
-    __param(1, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], AnttCacheController.prototype, "getAnttCache", null);
 __decorate([
-    (0, common_1.Delete)('/:id'),
-    (0, common_1.UseGuards)((0, passport_1.AuthGuard)('api-key')),
+    (0, common_1.Delete)("/:id"),
+    (0, common_1.UseGuards)((0, passport_1.AuthGuard)("api-key")),
     __param(0, (0, common_1.Res)()),
-    __param(1, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object, String]),
     __metadata("design:returntype", Promise)
 ], AnttCacheController.prototype, "deleteAnttCache", null);
 exports.AnttCacheController = AnttCacheController = __decorate([
-    (0, common_1.Controller)('antt-cache'),
+    (0, common_1.Controller)("antt-cache"),
     __metadata("design:paramtypes", [antt_cache_service_1.AnttCacheService])
 ], AnttCacheController);
 //# sourceMappingURL=antt-cache.controller.js.map

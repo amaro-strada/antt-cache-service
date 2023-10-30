@@ -1,7 +1,7 @@
-import { CreateAnttCacheDto } from 'dto/request/create-antt-cache.dto';
-import { UpdateAnttCacheDto } from 'dto/request/update-antt-cache.dto';
-import { IAnttCache } from 'interface/anttCache.interface';
-import { Model } from 'mongoose';
+import { CreateAnttCacheDto } from "dto/request/create-antt-cache.dto";
+import { UpdateAnttCacheDto } from "dto/request/update-antt-cache.dto";
+import { IAnttCache } from "interface/anttCache.interface";
+import { Model } from "mongoose";
 export declare class AnttCacheService {
     private anttCacheModel;
     constructor(anttCacheModel: Model<IAnttCache>);

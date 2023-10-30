@@ -1,5 +1,5 @@
-import { AnttCacheService } from './antt-cache.service';
-import { CreateAnttCacheDto } from 'dto/request/create-antt-cache.dto';
+import { AnttCacheService } from "./antt-cache.service";
+import { CreateAnttCacheDto } from "dto/request/create-antt-cache.dto";
 export declare class AnttCacheController {
     private readonly anttCacheService;
     constructor(anttCacheService: AnttCacheService);
