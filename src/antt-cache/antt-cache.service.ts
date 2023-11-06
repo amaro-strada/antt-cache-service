@@ -16,7 +16,7 @@ ConfigModule.forRoot();
 @Injectable()
 export class AnttCacheService {
   constructor(
-    @InjectModel(process.env.DB_DATABASE)
+    @InjectModel(process.env.COLLECTION_NAME)
     private anttCacheModel: Model<IAnttCache>
   ) {}
 

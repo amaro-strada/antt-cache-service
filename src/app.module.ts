@@ -15,7 +15,7 @@ import { HealthModule } from './health/health.module';
     MongooseModule.forRoot(process.env.DB_URI, {
       dbName: process.env.DB_NAME,
     }),
-    MongooseModule.forFeature([{ name: process.env.DB_DATABASE, schema: AnttCacheSchema }]),
+    MongooseModule.forFeature([{ name: process.env.COLLECTION_NAME, schema: AnttCacheSchema }]),
     AuthModule,
     HealthModule,
   ],

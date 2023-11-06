@@ -85,7 +85,7 @@ let AnttCacheService = class AnttCacheService {
 exports.AnttCacheService = AnttCacheService;
 exports.AnttCacheService = AnttCacheService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, mongoose_1.InjectModel)(process.env.DB_DATABASE)),
+    __param(0, (0, mongoose_1.InjectModel)(process.env.COLLECTION_NAME)),
     __metadata("design:paramtypes", [mongoose_2.Model])
 ], AnttCacheService);
 //# sourceMappingURL=antt-cache.service.js.map

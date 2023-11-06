@@ -27,7 +27,7 @@ exports.AppModule = AppModule = __decorate([
             mongoose_1.MongooseModule.forRoot(process.env.DB_URI, {
                 dbName: process.env.DB_NAME,
             }),
-            mongoose_1.MongooseModule.forFeature([{ name: process.env.DB_DATABASE, schema: driveraux_schema_1.AnttCacheSchema }]),
+            mongoose_1.MongooseModule.forFeature([{ name: process.env.COLLECTION_NAME, schema: driveraux_schema_1.AnttCacheSchema }]),
             auth_module_1.AuthModule,
             health_module_1.HealthModule,
         ],
